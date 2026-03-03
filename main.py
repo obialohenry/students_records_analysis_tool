@@ -7,34 +7,60 @@ SURNAME = "Surname"
 OTHERNAMES = "Other Names"
 
 def total_number_of_students()-> int:
-  """"""
+  """Return the total number of students in the file."""
   count_series = students_data.count()
   return count_series["Matric No"]
 
 def number_of_students_per_department(department:str):
-  """"""
+  """Prints on the console the number of students in a department.
+  
+  parameter:
+    - department: The dapartment's number of students printed on the console.
+  """
   department_series = students_data[COURSE]
   print(f"The number of students in {department} is {department_series.value_counts()[department]}")
 
 def number_of_students_per_grade(grade:str):
-  """"""
+  """Prints on the console the number of students with a grade (First, Second, or third class).
+  
+  parameter:
+    - grade: The number of students with this grade is printed on the console.
+  """
   grade_series = students_data[GRADE]
   print(f"The number of students with {grade} is {grade_series.value_counts()[grade]}")
 
 def number_of_students_per_reason(reason:str):
-  """"""
+  """Prints on the console the number of students with a reason.
+  
+  parameter:
+    - reason: The number of students with this reason is printed on the console.
+  """
   reason_series = students_data[REASON]
   print(f"The number of students with '{reason}' issue is {reason_series.value_counts()[reason]}")
 
 def students_belonging_to_a_specific_department(department:str):
-  """"""
+  """Prints on the console every student's name belonging to a department.
+  
+  parameters:
+    - department: The department whose students data is displayed.
+
+  Prints out the total number of students in the dapartment, and
+  prints out the name's in the format (SURNAME OTHERNAMES) of each students in the department, each on a new line.
+  """
   students_data_belongiging_to_dept = students_data[students_data[COURSE] == department]
   students_name_series = students_data_belongiging_to_dept[SURNAME] + " " + students_data_belongiging_to_dept[OTHERNAMES]
   print(f"There are {len(students_name_series)} students in {department}\n")
   print("\n".join(students_name_series.to_list()))
 
 def students_with_a_specific_issue(issue:str):
-  """"""
+  """Prints on the console every student's name with an issue.
+  
+  parameters:
+    - issue: The issue whose students data is displayed.
+
+  Prints out the total number of students with this issue, and
+  prints out the name's in the format (SURNAME OTHERNAMES) of each students with the issue, each on a new line.
+  """
   students_data_with_the_issue = students_data[students_data[REASON] == issue]
   students_name_series = students_data_with_the_issue[SURNAME] + " " + students_data_with_the_issue[OTHERNAMES]
   print(f"There are {len(students_name_series)} students with a '{issue}' issue\n")
