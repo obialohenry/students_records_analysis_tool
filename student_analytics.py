@@ -10,7 +10,7 @@ class StudentAnalytics:
     count_series = self.df.count()
     return count_series["Matric No"]
   
-  def number_of_students_per_department(self,department:str):
+  def number_of_students_per_department(self,department:str)-> None:
     """Prints the number of students in a department.
     
     Parameter:
@@ -19,7 +19,7 @@ class StudentAnalytics:
     department_series = self.df[constants.COURSE]
     print(f"The number of students in {department} is {department_series.value_counts()[department]}")
 
-  def number_of_students_per_grade(self,grade:str):
+  def number_of_students_per_grade(self,grade:str)-> None:
     """Prints the number of students with a grade (First, Second, or third class).
     
     Parameter:
@@ -28,7 +28,7 @@ class StudentAnalytics:
     grade_series = self.df[constants.GRADE]
     print(f"The number of students with {grade} is {grade_series.value_counts()[grade]}")
 
-  def number_of_students_per_reason(self,reason:str):
+  def number_of_students_per_reason(self,reason:str)-> None:
     """Prints the number of students with a reason.
     
     Parameter:
@@ -37,7 +37,7 @@ class StudentAnalytics:
     reason_series = self.df[constants.REASON]
     print(f"The number of students with '{reason}' issue is {reason_series.value_counts()[reason]}")
 
-  def print_students(self,filtered_df, context_label,):
+  def print_students(self,filtered_df, context_label,)-> None:
     """Prints student names
 
     Parameters:
@@ -57,22 +57,22 @@ class StudentAnalytics:
         print(f"There are {len(students_name_series)} students {context_label}\n")
         print("\n".join(students_name_series.to_list()))
 
-  def students_with_a_specific_issue(self,issue:str):
+  def students_with_a_specific_issue(self,issue_name:str)-> None:
     """Prints every student's name with an issue.
     
     Parameter:
       - issue: The issue whose students data is displayed.
     """
     filtered_df = self.df[
-          self.df[constants.REASON].str.lower() == issue.lower()
+          self.df[constants.REASON].str.lower() == issue_name.lower()
       ]
-    self.print_students(filtered_df, f"with '{issue}' issue")
+    self.print_students(filtered_df, f"with '{issue_name}' issue")
 
-  def students_belonging_to_a_specific_department(self,department:str):
+  def students_belonging_to_a_specific_department(self,department_name:str)-> None:
     """Prints every student's name belonging to a department.
     
     Parameter:
       - department: The department whose students data is displayed.
     """
-    filtered_df = self.df[self.df[constants.COURSE] == department]
-    self.print_students(filtered_df, f"in {department}")
+    filtered_df = self.df[self.df[constants.COURSE] == department_name]
+    self.print_students(filtered_df, f"in {department_name}")
