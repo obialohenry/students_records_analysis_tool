@@ -37,6 +37,7 @@ Prompts the user to select an issue and displays:
 ## Tech Stack
   - Python 3
   - Pandas
+  - Object-Oriented Programming (Class-based design)
 
 ## How to Run
 1. Install dependebcies:
@@ -54,7 +55,8 @@ python main.py
       - `.value_counts()` for categorical summaries
       - Boolean indexing for filtering
       - Vectorized string concatenation to combine `Surname` and `Other Names`
-  The program then interacts with the user via the console to retrieve specific student data.
+  - The functionality is encapsulated in the `StudentAnalytics` class for clean, reusable, and testable code.
+  - The program then interacts with the user via the console to retrieve specific student data, handling case-insensitive queries and displaying appropriate messages if no records are found.
 
 ## Author
 Henry Obialor
