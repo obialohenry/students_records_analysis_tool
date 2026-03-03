@@ -61,7 +61,7 @@ def students_with_a_specific_issue(issue:str):
   Prints out the total number of students with this issue, and
   prints out the name's in the format (SURNAME OTHERNAMES) of each students with the issue, each on a new line.
   """
-  students_data_with_the_issue = students_data[students_data[REASON] == issue]
+  students_data_with_the_issue = students_data[students_data[REASON].str.lower() == issue.lower()]
   students_name_series = students_data_with_the_issue[SURNAME] + " " + students_data_with_the_issue[OTHERNAMES]
   print(f"There are {len(students_name_series)} students with a '{issue}' issue\n")
   print("\n".join(students_name_series.to_list()))
