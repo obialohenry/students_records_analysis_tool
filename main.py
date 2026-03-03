@@ -43,38 +43,40 @@ def students_belonging_to_a_specific_department(department:str):
   
   parameters:
     - department: The department whose students data is displayed.
-
-  Prints out the total number of students in the dapartment, and
-  prints out the name's in the format (SURNAME OTHERNAMES) of each students in the department, each on a new line.
-  If the department `department` does not exist, it prints out a "Department `department` does not exist".
   """
-  students_data_belongiging_to_dept = students_data[students_data[COURSE] == department]
-  students_name_series = students_data_belongiging_to_dept[SURNAME] + " " + students_data_belongiging_to_dept[OTHERNAMES]
-  if len(students_name_series) > 0:
-    print(f"Below are the name of students in {department}\n")
-    print(f"There are {len(students_name_series)} students in {department}\n")
-    print("\n".join(students_name_series.to_list()))
-  else:
-    print(f"Department '{department}' does not exist.")
+  filtered_df = students_data[students_data[COURSE] == department]
+  print_students(filtered_df, f"in {department}")
 
 def students_with_a_specific_issue(issue:str):
   """Prints on the console every student's name with an issue.
   
   parameters:
     - issue: The issue whose students data is displayed.
-
-  Prints out the total number of students with this issue, and
-  prints out the name's in the format (SURNAME OTHERNAMES) of each students with the issue, each on a new line.
-  If the issue `issue` does not exist, it prints out a "Issue `issue` does not exist".
   """
-  students_data_with_the_issue = students_data[students_data[REASON].str.lower() == issue.lower()]
-  students_name_series = students_data_with_the_issue[SURNAME] + " " + students_data_with_the_issue[OTHERNAMES]
-  if len(students_name_series) > 0:
-    print(f"Below are the name of students with '{issue}' issue\n")
-    print(f"There are {len(students_name_series)} students with a '{issue}' issue\n")
-    print("\n".join(students_name_series.to_list()))
-  else:
-    print(f"Issue '{issue}' does not exist.")
+  filtered_df = students_data[
+        students_data[REASON].str.lower() == issue.lower()
+    ]
+  print_students(filtered_df, f"with '{issue}' issue")
+
+def print_students(filtered_df, context_label,):
+    """Prints student names on the console
+
+    parameters:
+      - filtered_df: The filtered Dataframe containing student records.
+      - context_label: Describes the filtering context (e.g., department or issue).
+
+    Behavior:
+      - Prints the total number of students, and each student's name in the order (SURNAME OTHERNAMES) on a new line.
+      - Prints out a "does not exist" message, if the Dataframe is empty.
+    """
+    students_name_series = filtered_df[SURNAME] + " " + filtered_df[OTHERNAMES]
+
+    if len(students_name_series) > 0:
+        print(f"Below are the name of students {context_label}\n")
+        print(f"There are {len(students_name_series)} students {context_label}\n")
+        print("\n".join(students_name_series.to_list()))
+    else:
+        print(f"{context_label.capitalize()} does not exist.")
 
 
 print("START\n")
