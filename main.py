@@ -46,11 +46,16 @@ def students_belonging_to_a_specific_department(department:str):
 
   Prints out the total number of students in the dapartment, and
   prints out the name's in the format (SURNAME OTHERNAMES) of each students in the department, each on a new line.
+  If the department `department` does not exist, it prints out a "Department `department` does not exist".
   """
   students_data_belongiging_to_dept = students_data[students_data[COURSE] == department]
   students_name_series = students_data_belongiging_to_dept[SURNAME] + " " + students_data_belongiging_to_dept[OTHERNAMES]
-  print(f"There are {len(students_name_series)} students in {department}\n")
-  print("\n".join(students_name_series.to_list()))
+  if len(students_name_series) > 0:
+    print(f"Below are the name of students in {department}\n")
+    print(f"There are {len(students_name_series)} students in {department}\n")
+    print("\n".join(students_name_series.to_list()))
+  else:
+    print(f"Department '{department}' does not exist.")
 
 def students_with_a_specific_issue(issue:str):
   """Prints on the console every student's name with an issue.
@@ -60,11 +65,16 @@ def students_with_a_specific_issue(issue:str):
 
   Prints out the total number of students with this issue, and
   prints out the name's in the format (SURNAME OTHERNAMES) of each students with the issue, each on a new line.
+  If the issue `issue` does not exist, it prints out a "Issue `issue` does not exist".
   """
   students_data_with_the_issue = students_data[students_data[REASON].str.lower() == issue.lower()]
   students_name_series = students_data_with_the_issue[SURNAME] + " " + students_data_with_the_issue[OTHERNAMES]
-  print(f"There are {len(students_name_series)} students with a '{issue}' issue\n")
-  print("\n".join(students_name_series.to_list()))
+  if len(students_name_series) > 0:
+    print(f"Below are the name of students with '{issue}' issue\n")
+    print(f"There are {len(students_name_series)} students with a '{issue}' issue\n")
+    print("\n".join(students_name_series.to_list()))
+  else:
+    print(f"Issue '{issue}' does not exist.")
 
 
 print("START\n")
@@ -90,13 +100,11 @@ print("\n")
 # ----------- STUDENTS BELONGING TO A SPECIFIC DEPARTMENT ---------- #
 print(f"Recorded Departments: {", ".join(departments)}\n")
 department = input("From the departments above, which will you like to get it's students data?: ").title()
-print(f"Below are the name of students in {department}\n")
 students_belonging_to_a_specific_department(department)
 print("\n")
 # ----------- STUDENTS WITH A SPECIFIC ISSUE ---------- #
 print(f"Recorded Issues: {", ".join(reasons)}\n")
 issue = input("From the issues above, which will you like to get it's students data?: ").title()
-print(f"Below are the name of students with '{issue}' issue\n")
 students_with_a_specific_issue(issue)
 print("\n")
 
