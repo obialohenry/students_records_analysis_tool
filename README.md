@@ -34,6 +34,12 @@ Prompts the user to select an issue and displays:
   - Total students with that issue
   - Full names of each affected student
 
+### Command-Line Interface (CLI)
+- Menu-driven interface to select the desired task
+- Handles invalid inputs gracefully
+- Performs case-insensitive searches for departments and issues
+- Displays appropriate messages if no records are found
+
 ## Tech Stack
   - Python 3
   - Pandas
@@ -56,7 +62,7 @@ python main.py
       - Boolean indexing for filtering
       - Vectorized string concatenation to combine `Surname` and `Other Names`
   - The functionality is encapsulated in the `StudentAnalytics` class for clean, reusable, and testable code.
-  - The program then interacts with the user via the console to retrieve specific student data, handling case-insensitive queries and displaying appropriate messages if no records are found.
+  - The CLI interacts with the user via a menu, handling invalid or non-existent entries and providing clear output.
 
 ## Author
 Henry Obialor
